@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 4</title>
+    <meta name="description" content="Laboratorul numarul 4, lucram cu stiluri" />
+    <meta name="keywords" content="style, css, html, laborator" />
+    <meta name="author" content="Grajdian Cristian" />
+    <link rel="shortcut icon" href="./img/icon.png">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div class="container sarcina1">
+        <div class="block block1"></div>
+        <div class="block block2"></div>
+        <div class="block block3"></div>
+        <div class="block block4"></div>
+        <div class="block block5"></div>
+    </div>
+    <div class="container sarcina2">
+        <form action="post" class="form formCont">
+            <fieldset class="form1 forms">
+                <legend>test</legend>
+                <div>
+                    <label for="name">*Numele:</label>
+                    <input id="name" type="text" pattern="[A-Za-z]{20}" required>
+                </div>
+                <div>
+                    <label for="pname">*Prenumele:</label>
+                    <input id="pname" type="text" pattern="[A-Za-z]{20}" required>
+                </div>
+                <div>
+                    <label for="email">E-mail:</label>
+                    <input id="email" type="email">
+                </div>
+                <div>
+                    <label for="data">*Data nasterii:</label>
+                    <input id="data" type="date" required>
+                </div>
+                <div>
+                    <label for="sexul">Sexul:</label>
+                    <div class="input">
+                        <label for="Masc" id="noMargin">M</label>
+                        <input id="Masc" type="radio" name="sexul">
+                        <label for="Fem" id="noMargin">F</label>
+                        <input id="Fem" type="radio" name="sexul">
+                    </div>
+                </div>
+                <div>
+                    <label for="tel">Telefonul:</label>
+                    <input id="tel" type="tel">
+                </div>
+                <div>
+                    <label for="raion">Raionul:</label>
+                    <select id="raion" name="raion">
+                        <option value="Edinet">Edinet</option>
+                        <option value="Criuleni">Criuleni</option>
+                        <option value="Chisinau">Chisinau</option>
+                        <option value="Balti">Balti</option>
+                        <option value="Calarasi">Calarasi</option>
+                    </select>
+                </div>
+                <div class="studies">
+                    <label>Studii:</label>
+                    <div>
+                        <input type="checkbox">Colegiu <br />
+                        <input type="checkbox">Licenta <br />
+                        <input type="checkbox">Master <br />
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="form2 forms">
+                <legend>test</legend>
+                
+            </fieldset>
+            <fieldset class="form3 forms">
+                <legend>test</legend>
+                
+            </fieldset>
+        </form>
+    </div>
+</body>
+</html>

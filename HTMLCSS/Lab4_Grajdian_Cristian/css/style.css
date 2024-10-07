@@ -1,0 +1,23 @@
+*, *::before, *::after { padding: 0; margin: 0; box-sizing: border-box; }
+#noMargin { margin-right: 0; }
+body { display: flex; align-items: center; min-height: 100vh; flex-direction: column; }
+    .container { width: 100%; gap: 1rem; display: flex; justify-content: center; height: 100%; padding: 1rem; flex-wrap: wrap; }
+    .sarcina1 { background: white; color: black; }
+        .block { width: 150px; aspect-ratio: 1/1; border-radius: 1rem; }
+        .block1 { background: red; }
+        .block2 { background: black; background-image: url("../img/sarc1img.png"); background-repeat: repeat; }
+        .block3 { background: magenta; background-image: url("../img/sarc1img.png"); background-repeat: repeat-x; }
+        .block4 { background: lightgreen; background-image: url("../img/sarc1img.png"); background-repeat: repeat-y; }
+        .block5 { background: aqua; background-image: url("../img/sarc1img.png"); background-repeat: no-repeat; background-position: center; }
+    .sarcina2 { background: rgb(40, 40, 40); color: white; }
+        .formCont { border: 1px solid white; padding: 1rem; }
+            .form { display: grid; grid-template-areas: "a b" "a b" "a c"; }
+                .form1 { grid-area: a; }
+                .form2 { grid-area: b; }
+                .form3 { grid-area: c; }
+                .forms { display: flex; flex-direction: column; gap: 1rem; padding: 1rem; }
+                .forms div label { margin-right: 1rem; }
+                .forms div input, .forms div select { float: right; background: transparent; border: 1px solid white; color: white; padding: .1rem .5rem; background: rgb(40, 40, 40); }
+                #Masc, #Fem { float: none; }
+                .forms div .input { float: right; gap: 1rem; display: flex; }
+                .studies { display: flex; align-items: center; justify-content: space-between; }

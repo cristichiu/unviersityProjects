@@ -1,0 +1,6 @@
+*, *::before, *::after { box-sizing: border-box; padding: 0; margin: 0; }
+body { display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+.container { aspect-ratio: 1/1; width: 100px; background: red; }
+@media (min-width: 400px) {
+    .container { width: 300px; }
+}

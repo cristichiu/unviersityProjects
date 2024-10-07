@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laborator nr.1</title>
+    <meta name="description" content="O pagina in care am invatat sa utilizez limbajul de marcare HTML" />
+    <meta name="keywords" content="Proiect, Laborator, HTML" />
+    <meta name="author" content="Grajdian Cristian" />
+    <link rel="shortcut icon" href="./imagini/icon.png">
+</head>
+<body>
+    <!-- meniu -->
+    <nav id="sus" style="display: flex; gap: 1rem; justify-content: center;">
+        <a href="#cap1">Capitolul 1</a>
+        <a href="#cap2">Capitolul 2</a>
+        <a href="#cap3">Capitolul 3</a>
+        <a href="#cap4">Liste ordonate</a>
+        <a href="#cap5">Liste neordonate</a>
+        <a href="#cap6">Liste mix</a>
+        <a href="#cap7">Lista descriere</a>
+        <a href="#cap8">Tabel</a>
+        <a href="#cap9">Referințe externe</a>
+    </nav>
+    <hr />
+    <!-- Capitloul 1 -->
+    <h1 id="cap1">Capitolul 1</h1>
+    <h2>Capitolul 1.1</h2>
+    <p>Acesta este capitolul 1 si eu incerc sa scriu un text de umplutura caci nu am creativitate sa scriu despre ceva anume</p>
+    <h2>Capitolul 1.2</h2>
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias natus modi alias necessitatibus sed repellat reprehenderit voluptas, earum, blanditiis
+        <br /><br /><b>Acesta este un vers scris cu br</b><br />
+        <b>Acesta este alt vers scris cu br</b><br />
+        <b>Acesta este al 3-lea vers scris cu br</b><br />
+        <pre>
+Acestea sunt mai multe versuri
+            Pe care le pot scrie din rand nou
+        Oricand si cu diferite spatieri.
+        </pre>
+        Aperiam suscipit corrupti et, nostrum laborum eveniet voluptate, incidunt beatae libero harum nam. Aperiam consequuntur, commodi possimus facere alias enim ipsum aliquid soluta.
+    </p>
+    <a href="#sus">sus</a>
+    <!-- Liste ordonate -->
+    <hr />
+    <h3 id="cap4">Liste Ordonate</h3>
+    <h4>Lista start 3, tip cifre</h4>
+    <ol type="1" start="3">
+        <li>Element 1</li>
+        <li>Element 2</li>
+        <li>Element 3</li>
+        <li>Element 4</li>
+    </ol>
+    <h4>Lista start a, tip litere</h4>
+    <ol type="a">
+        <li>Element 1</li>
+        <li>Element 2</li>
+        <li>Element 3</li>
+        <li>Element 4</li>
+    </ol>
+    <h4>Lista start VI, tip roman reversed</h4>
+    <ol type="I" reversed>
+        <li>Element 1</li>
+        <li>Element 2</li>
+        <li>Element 3</li>
+        <li>Element 4</li>
+    </ol>
+    <!-- Liste neordonate -->
+    <hr />
+    <h3 id="cap5">Liste neordonate</h3>
+    <ul type="circle">
+        <li>Element 1</li>
+        <li>Element 2</li>
+        <li>Element 3</li>
+        <li>Element 4</li>
+    </ul>
+    <ul type="square">
+        <li>Element 1</li>
+        <li>Element 2</li>
+        <li>Element 3</li>
+        <li>Element 4</li>
+    </ul>
+    <ul>
+        <li>Element 1</li>
+        <li>Element 2</li>
+        <li>Element 3</li>
+        <li>Element 4</li>
+    </ul>
+    <!-- Lista mix -->
+    <hr />
+    <h3 id="cap6">Lista mix</h3>
+    <ol type="i" reversed>
+        <li>Exemplu 1:
+            <ul type="circle">
+                <li>Lorem, ipsum dolor.</li>
+                <li>Lorem, ipsum dolor.</li>
+                <li>Lorem, ipsum dolor.</li>
+            </ul>
+        </li>
+        <li>Exemplu 2:
+            <ol type="A">
+                <li>Lorem, ipsum dolor.</li>
+                <li>Lorem, ipsum dolor.</li>
+                <li>Lorem, ipsum dolor.</li>
+            </ol>
+        </li>
+        <li>Exemplu 3:
+            <ul type="square">
+                <li>Lorem, ipsum dolor.</li>
+                <li>Lorem, ipsum dolor.</li>
+                <li>Lorem, ipsum dolor.</li>
+            </ul>
+        </li>
+    </ol>
+    <!-- Lista de descrieri -->
+    <hr />
+    <h3 id="cap7">Lista de descrieri</h3>
+    <dl>
+        <dt><b>Ce limbaje o să învățăm la aceste cursuri: </b></dt>
+        <dd>HTML</dd>
+        <dd>CSS</dd>
+        <dt><b>Lorem, ipsum dolor.</b></dt>
+        <dd>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem libero ea esse corrupti quos minus.</dd>
+        <dt><b>Acesta este titlul</b></dt>
+        <dd>Aceasta este descrierea 1</dd>
+        <dd>Aceasta este descrierea 2</dd>
+        <dd>Aceasta este descrierea 3</dd>
+    </dl>
+    <a href="#sus">Sus</a>
+    <!-- Capitloul 2 -->
+    <hr />
+    <h1 id="cap2">Capitolul 2</h1>
+    <h2>Capitolul 2.1</h2>
+    <p><q>Voluptatum, labore eveniet. Repellat</q> placeat delectus labore omnis porro sequi odit voluptatum, pariatur ipsa aut repellendus distinctio!</p>
+    <h2>Capitolul 2.2</h2>
+    <p><cite>Lorem ipsum dolor sit amet consectetur adipisicing elit.</cite> <address>Maiores, officiis perferendis</address> <abbr title="Acesta este doar un test">TEST</abbr> 2 <sub>5</sub> <sup>3</sup> <ins>Perspiciatis rerum possimus mollitia perferendis</ins> <del>architecto in rem, ut eius et</del> <mark> nihil praesentium recusandae, dolorum eaque</mark>, <code>nobis excepturi dolore esse odio</code> <blockquote>Lorem ipsum dolor sit amet consectetur adipisicing elit.</blockquote> <i>vero minus beatae. Sunt aut</i> incidunt, asperiores excepturi quasi ullam, molestias itaque vitae, vel iste libero repudiandae tenetur dicta fugiat dolorum. Quam nostrum dolores natus explicabo necessitatibus modi aspernatur eligendi tempora cum illum unde ex velit eveniet vero, ut dolore enim esse ducimus. Repellat magni eum veniam quod velit, suscipit facilis explicabo quos labore quia ipsa voluptatem ipsum eos libero praesentium doloribus? Id corrupti ullam totam tempora in.</p>
+    <a href="#sus">sus</a>
+    <!-- Tabele -->
+    <h3 id="cap8">Tabele</h3>
+    <table border="1" cellpadding="20" cellspacing="0">
+        <caption><strong>Repartizarea orelor pentru acest semestru</strong></caption>
+        <tr align="center">
+            <th rowspan="3">Semestru</th>
+            <th colspan="4">Total ore</th>
+            <th rowspan="3">Evaluarea</th>
+            <th rowspan="3">Nr. de credite</th>
+        </tr>
+        <tr align="center">
+            <td rowspan="2">Total ore semestru</td>
+            <td colspan="3">Inclusiv</td>
+        </tr>
+        <tr align="center">
+            <td>Curs</td>
+            <td>Laborator</td>
+            <td>LI</td>
+        </tr>
+        <tr align="center">
+            <td>I</td>
+            <td>150</td>
+            <td>30</td>
+            <td>45</td>
+            <td>75</td>
+            <td>Examen</td>
+            <td>5</td>
+        </tr>
+        <tr align="center">
+            <td>II</td>
+            <td>90</td>
+            <td>30</td>
+            <td>30</td>
+            <td>30</td>
+            <td>Examen</td>
+            <td>4</td>
+        </tr>
+        <tr align="center">
+            <td>Total ore</td>
+            <td colspan="4">240</td>
+            <td>Total credite</td>
+            <td>9</td>
+        </tr>
+    </table>
+    <a href="#sus">Sus</a>
+    <!-- Capitloul 3 -->
+    <hr />
+    <h1 id="cap3">Capitolul 3</h1>
+    <h2>Capitolul 3.1</h2>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur esse perspiciatis culpa nisi suscipit! Earum aliquid facilis adipisci doloremque ea non molestiae architecto praesentium ratione eligendi minus provident totam vitae quibusdam, quo ullam odit alias harum iste, laborum maiores! Dolor error fugit repudiandae delectus aperiam pariatur veniam provident quam illo reprehenderit! Eum quis architecto facilis quasi magni pariatur assumenda inventore ad reprehenderit perferendis dignissimos necessitatibus dolor est, odio fuga autem officia quae fugiat labore corporis tenetur!</p>
+    <h2>Capitolul 3.2</h2>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit nihil perferendis incidunt commodi?</p>
+    <a href="#sus">Sus</a>
+    <!-- Referinte externe  -->
+    <hr />
+    <h1 id="cap9">Referințe externe</h1>
+    <div style="display: flex; flex-direction: column;">
+        <h1><a target="pagini" href="https://google.com">Google</a></h1>
+        <h1><a target="pagini" href="https://youtube.com">Youtube</a></h1>
+        <h1><a target="pagini" href="https://facebook.com">Facebook</a></h1>
+    </div>
+    <a href="#sus">Sus</a>
+</body>
+</html>
