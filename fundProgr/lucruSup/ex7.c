@@ -54,6 +54,11 @@ int pop(struct Stiva *st) {
     }
 }
 
+void freeAll(struct Stiva *st) {
+    free(st->data);
+    free(st);
+}
+
 int main() {
     struct Stiva *st = init(5, 1);
     for(int i=0; i<10; i++) {
@@ -62,5 +67,6 @@ int main() {
     print(st);
     pop(st);
     printf("aici- %d\n", peek(st));
+    freeAll(st);
     return 0;
 }
