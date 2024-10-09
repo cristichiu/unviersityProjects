@@ -19,39 +19,35 @@
         <div class="block block5"></div>
     </div>
     <div class="container sarcina2">
-        <form action="post" class="form formCont">
-            <fieldset class="form1 forms">
-                <legend>test</legend>
-                <div>
+        <form action="post" class="forms">
+            <fieldset class="form1 form">
+                <legend><b>Date personale</b></legend>
+                <div class="formEl">
                     <label for="name">*Numele:</label>
-                    <input id="name" type="text" pattern="[A-Za-z]{20}" required>
+                    <input id="name" type="text" required>
                 </div>
-                <div>
-                    <label for="pname">*Prenumele:</label>
-                    <input id="pname" type="text" pattern="[A-Za-z]{20}" required>
+                <div class="formEl">
+                    <label for="surn">*Prenumele:</label>
+                    <input id="surn" type="text" required>
                 </div>
-                <div>
-                    <label for="email">E-mail:</label>
-                    <input id="email" type="email">
+                <div class="formEl">
+                    <label for="mail">E-mail:</label>
+                    <input id="mail" type="email">
                 </div>
-                <div>
-                    <label for="data">*Data nasterii:</label>
-                    <input id="data" type="date" required>
+                <div class="formEl">
+                    <label for="data">*Data nașterii:</label>
+                    <input id="data" type="date">
                 </div>
-                <div>
-                    <label for="sexul">Sexul:</label>
-                    <div class="input">
-                        <label for="Masc" id="noMargin">M</label>
-                        <input id="Masc" type="radio" name="sexul">
-                        <label for="Fem" id="noMargin">F</label>
-                        <input id="Fem" type="radio" name="sexul">
+                <div class="formEl">
+                    <div>Sexul:</div>
+                    <div>
+                        <input name="sex" id="F" type="radio">
+                        <label for="F">F</label>
+                        <input name="sex" id="M" type="radio">
+                        <label for="M">M</label>
                     </div>
                 </div>
-                <div>
-                    <label for="tel">Telefonul:</label>
-                    <input id="tel" type="tel">
-                </div>
-                <div>
+                <div class="formEl">
                     <label for="raion">Raionul:</label>
                     <select id="raion" name="raion">
                         <option value="Edinet">Edinet</option>
@@ -61,24 +57,97 @@
                         <option value="Calarasi">Calarasi</option>
                     </select>
                 </div>
-                <div class="studies">
-                    <label>Studii:</label>
-                    <div>
-                        <input type="checkbox">Colegiu <br />
-                        <input type="checkbox">Licenta <br />
-                        <input type="checkbox">Master <br />
+                <div class="formEl">
+                    <div>Studii:</div>
+                    <div class="studies">
+                        <div>
+                            <input id="col" type="checkbox">
+                            <label for="col">Colegiu</label>
+                        </div>
+                        <div>
+                            <input id="lic" type="checkbox">
+                            <label for="lic">Licență</label>
+                        </div>
+                        <div>
+                            <input id="mast" type="checkbox">
+                            <label for="mast">Master</label>
+                        </div>
                     </div>
                 </div>
+                <div class="formEl">
+                    <label for="sup">Suplimentar:</label>
+                    <textarea id="sup" maxlength="1000"></textarea>
+                </div>
             </fieldset>
-            <fieldset class="form2 forms">
-                <legend>test</legend>
-                
+            <fieldset class="form2 form">
+                <legend>Date despre produsul ales</legend>
+                <div class="formEl">
+                    <label for="denPr">*Denumirea produs:</label>
+                    <input id="denPr" type="text" required>
+                </div>
+                <div class="formEl">
+                    <label for="produ">*Producatorul:</label>
+                    <input id="produ" type="text" required>
+                </div>
+                <div class="formEl">
+                    <label for="cantDePr">*Cantitatea de produse:</label>
+                    <input id="cantDePr" type="number" required>
+                </div>
+                <div class="formEl">
+                    <label for="culoare">*Culoarea:</label>
+                    <input id="culoare" type="color" required>
+                </div>
+                <div class="formEl">
+                    <label for="marimea">*Marimea:</label>
+                    <input id="marimea" type="number" required>
+                </div>
             </fieldset>
-            <fieldset class="form3 forms">
-                <legend>test</legend>
-                
+            <fieldset class="form3 form">
+                <legend>Date bancare</legend>
+                <div class="formEl">
+                    <div>*Tipul cardului:</div>
+                    <div>
+                        <input name="card" id="visa" type="radio" required>
+                        <label for="visa">Visa</label>
+                        <input name="card" id="masterCard" type="radio" required>
+                        <label for="masterCard">Master Card</label>
+                    </div>
+                </div>
+                <div class="formEl">
+                    <label for="nrCard">*Numarul cardului:</label>
+                    <input id="nrCard" type="text">
+                </div>
+                <div class="formEl">
+                    <label for="exp">*Expiră:</label>
+                    <input id="exp" type="date">
+                </div>
             </fieldset>
+            <div class="foo">
+                <div>
+                    <button>Anulează</button>
+                    <input type="submit" value="Trimite">
+                </div>
+                <div>*Câmpul trebuie să fie completat!</div>
+            </div>
         </form>
+    </div>
+    <div class="container sarcina3">
+        <div class="list">
+            <ol>
+                <li>Elementul 1</li>
+                <li>elementul 2</li>
+                <li>elementul 3</li>
+            </ol>
+            <ul>
+                <li>elementul 1</li>
+                <li>Elementul 2</li>
+                <li>elementul 3</li>
+            </ul>
+        </div>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae commodi consectetur labore, corporis nisi, iste accusamus, nesciunt reiciendis odio harum voluptatibus ad minus illo iusto dolorum laudantium blanditiis dolor consequatur.</p>
+    </div>
+    <div class="container sarcina4">
+        <a href="https://www.google.com/" target="_blank">Du-te la google</a>
     </div>
 </body>
 </html>
