@@ -1,0 +1,71 @@
+*, *::before, *::after { padding: 0; margin: 0; box-sizing: border-box; }
+
+body { display: flex; align-items: center; min-height: 100vh; flex-direction: column; }
+    .container { width: 100%; gap: 1rem; display: flex; justify-content: center; height: 100%; padding: 1rem; flex-wrap: wrap; }
+
+.sarc1 { display: flex; gap: 1rem; flex-direction: column; margin: 1rem; }
+.sarc1 .imgbox2 { display: flex; justify-content: center; }
+.sarc1 .imgbox1 { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+
+.sarcina2, .sarcina4 { background: rgb(40, 40, 40); color: white; }
+        .forms { display: grid; grid-template-areas: "a" "b" "c" "d"; gap: 1rem; border: 1px solid white; padding: 1rem; }
+            .form1 { grid-area: a; }
+            .form2 { grid-area: b; }
+            .form3 { grid-area: c; }
+            .form { display: flex; flex-direction: column; padding: 1rem; gap: 1rem; width: 100%; }
+                .formEl { display: flex; flex-direction: column; justify-content: space-between; gap: 1rem; align-items: center; }
+                .formEl div { display: flex; gap: .5rem; }
+                .formEl input { border: 1px solid white; background: transparent; color: white; padding: .25rem 1rem; }
+                .formEl input:focus { border: 3px solid white; }
+                    .studies { display: flex; flex-direction: column; }
+                    #sup, #col, #lic, #mast, #raion, #M, #F { background: transparent; color: white; padding: .25rem 1rem; border: 1px solid white }
+                    #raion option { color: white; background: rgb(40,40,40); }
+                    #culoare { padding: .1rem; width: 3rem; }
+                .foo { display: flex; justify-content: space-between; grid-area: d; }
+        @media (min-width: 850px) { .forms { grid-template-areas: "a b" "a b" "a c" "d d"; } }
+        @media (min-width: 450px) { .form { width: 350px; } .formEl { flex-direction: row; } }
+
+
+.sarc2 { display: grid; text-align: center; width: 85vw; max-width: 700px;
+    grid-template-areas:
+        "a a"
+        "b g"
+        "c h"
+        "d i"
+        "e j"
+        "e k"
+        "f l"
+        "f m"
+        "b1 n"
+        "c1 o"
+        "d1 p"
+        "e1 q"
+        "e1 r"
+        "e1 s"
+        "f1 t"
+        "f1 u"
+        "f1 v"
+        "b2 w"
+        "c2 x"
+        "d2 y"
+        "e2 z"
+        "f2 aa"
+        "ab ac"; }
+.sarc2 div { border: 1px solid black; padding: 1rem; }
+.sarc2 img { width: 100px; aspect-ratio: 1/1; }
+
+@media (min-width: 600px) {
+    .sarc2 { grid-template-areas: 
+        "a a a a a"
+        "b c d e f"
+        "g h i j l"
+        "g h i k m"
+        "n o p q t"
+        "n o p r u"
+        "n o p s v"
+        "w x y z aa"
+        "ab ab ac ac ac"; }
+    .dis { position: absolute; opacity: 0; }
+}
+
+.sarc4 { width: 85vw; max-width: 400px; }
