@@ -39,8 +39,10 @@ char *intToString(int num) {
 }
 
 int main() {
-    printf("%s\n", intToString(-4219));
-    printf("%i\n", stringToInt("42159"));
-    printf("%s", intToString(stringToInt("-234")));
+    // printf("%s\n", intToString(-4219));
+    // printf("%i\n", stringToInt("42159"));
+    int x = stringToInt("124a");
+    printf("%d", x);
+    // printf("%s", intToString(stringToInt("-234")));
     return 0;
 }

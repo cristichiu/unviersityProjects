@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include <time.h> 
 
-typedef void (*sort)(int, int[]);
-
 void bubble(int size, int data[size]) {
     for(int i=0; i<size; i++) {
         for(int j=0; j<size-i-1; j++) {
@@ -40,14 +38,14 @@ void selection(int size, int data[size]) {
     }
 }
 
-void sortF(int size, int data[size], sort func) { func(size, data); }
+void sortF(int size, int data[size], void (*sort)(int, int[])) { sort(size, data); }
 
 int main() {
     srand(time(0));
     clock_t start, end;
     double totalTime;
 
-    int size = 50000;
+    int size = 100;
     int data[size];
     for(int i=0; i<size; i++) data[i] = rand();
 
@@ -59,7 +57,8 @@ int main() {
 
     totalTime = ((double)(end - start)) / CLOCKS_PER_SEC;
 
-    printf("%f secunde", totalTime);
+    printf("%f secunde\n", totalTime);
+    for(int i=0; i<size; i++) printf("%d ", data[i]);
 
     return 0;
 }

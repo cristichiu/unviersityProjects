@@ -11,6 +11,7 @@ struct Stiva {
 struct Stiva* init(int capacity, int addCycle) {
     struct Stiva *st = (struct Stiva*)malloc(sizeof(struct Stiva));
     if(addCycle <=0) addCycle = 1;
+    if(capacity <=0) capacity = 1;
     st->capacity = capacity;
     st->top = -1;
     st->addCycle = addCycle;
