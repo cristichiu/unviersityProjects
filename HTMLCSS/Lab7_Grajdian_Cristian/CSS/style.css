@@ -1,0 +1,54 @@
+*, *::before, *::after { padding: 0; margin: 0; box-sizing: border-box; }
+
+body { display: flex; align-items: center; flex-direction: column; background: var(--prime); color: var(--text); --prime: #040D12; --second: #183D3D; --accent: #5C8374; --text: #d6dbda; }
+
+#menu { display: none; }
+.menuToggle { position: fixed; z-index: 100; top: 1rem; left: 1rem; }
+nav { width: 100%; height: 100vh; max-width: 300px; position: fixed; background: var(--second); transition: .3s; transform: translateX(-100%); top: 0; left: 0; z-index: 99 }
+
+.navCont { margin: 4.5rem 1rem; display: flex; flex-direction: column; }
+.navCont a { text-decoration: none; color: var(--text); font-size: 2rem; border-top: 1px solid var(--accent); text-align: center; padding: 1rem 0; transition: .3s; }
+.navCont a:last-child { border-bottom: 1px solid var(--accent); }
+.navCont a:hover { background: var(--accent) }
+
+#menu:checked ~ nav {
+    transform: translateX(0);
+}
+label .close { display: none; }
+#menu:checked ~ label .close {
+    display: block;
+}
+#menu:checked ~ label .open {
+    display: none;
+}
+
+@media (min-width: 900px) {
+    nav { max-width: 100%; height: auto; transform: translateX(0) translateY(-100%); display: flex; justify-content: center; }
+    .navCont { flex-direction: row; margin: 1rem 4.5rem; }
+    .navCont a { border-top: none; border-left: 1px solid var(--accent); padding: 0 1rem; }
+    .navCont a:last-child { border-bottom: none; border-right: 1px solid var(--accent); }
+    #menu:checked ~ nav {
+        transform: translateY(0);
+    }
+}
+
+.gallery { display: grid; gap: 2rem; justify-content: center; margin: 4.5rem 0 1rem 0; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); width: calc(100% - 2rem); max-width: 1600px; transform-style: preserve-3d; }
+
+@media (min-width: 1100px) {
+    nav { transform: translateY(0); }
+    label .open { display: none; }
+    .gallery { margin-top: 5.5rem; }
+}
+
+.img { position: relative; cursor: pointer; transition: .5s; }
+.imgDesc { position: absolute; translate: -50% -50%; top: 50%; left: 50%; color: var(--text); font-size: 1.5rem; opacity: 0; transition: .3s; text-shadow: 1px 1px 1px black; }
+img { transition: .3s; width: 100% }
+.img:hover img { filter: blur(5px); }
+
+.img:hover .imgDesc { opacity: 1; }
+
+footer { width: 100%; display: flex; justify-content: center; position: relative; }
+footer img { width: 200px; }
+footer a { position: absolute; width: 60px; height: 100%; }
+footer .disc { transform: translate(-110%); }
+footer .inst { transform: translate(110%); }
