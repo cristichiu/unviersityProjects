@@ -11,9 +11,8 @@ class AbstractBase {
 public:
     virtual void read() = 0;
     virtual void show() = 0;
-    virtual int getElForSort() = 0;
-    virtual string getElForFind() = 0;
-    virtual string getElForDelete() = 0;
+    virtual int getRaceNumber() const = 0;
+    virtual string getCountryName() const = 0;
     virtual ~AbstractBase() {}
 };
 
@@ -29,18 +28,18 @@ public:
     Aeroport(string company, string data, string country, int courses): companyName(move(company)), date(move(data)), countryName(move(country)), raceNumber(courses) {}
     ~Aeroport() {}
 
-    void read() override {
+    virtual void read() override {
         setCompanyName();
         setDate();
         setCountryName();
         setRaceNumber();
     }
-    void show() override {
+    virtual void show() override {
         cout<<endl<<"=============================="<<endl<<"Nume companie: "<<getCompanyName()<<endl<<"Data infiintarii: "<<getDate()<<endl<<"Numele tarii: "<<getCountryName()<<endl<<"Numarul de curse: "<<getRaceNumber()<<endl<<"=============================="<<endl<<endl;
     }
 
-    int getRaceNumber() const { return raceNumber; }
-    const string& getCountryName() const { return countryName; }
+    virtual int getRaceNumber() const override { return raceNumber; }
+    virtual string getCountryName() const override { return countryName; }
     const string& getCompanyName() const { return companyName; }
     const string& getDate() const { return date; }
 
@@ -49,7 +48,7 @@ public:
     string setCountryName() { cout<<"Numele tarii: "; cin>>countryName; return getCountryName(); }
     int setRaceNumber() { 
         cout<<"Numarul de curse: ";
-        while(!(cin>>raceNumber)) { cout<<"Trebuie sa fie cifra (int): "; cin.clear(); cin.ignore(1000, '\n'); }
+        while(!(cin>>raceNumber) || raceNumber <= 0) { cout<<"Trebuie sa fie cifra (int): "; cin.clear(); cin.ignore(1000, '\n'); }
         return getRaceNumber();
     }
 };
@@ -63,13 +62,13 @@ public:
     Owner(): Aeroport(), x1(""), x2(0), x3(0) {}
     Owner(string company, string data, string country, int courses, string x1P, int x2P, int x3P): Aeroport(move(company), move(data), move(country), courses), x1(move(x1P)), x2(x2P), x3(x3P) {}
     ~Owner() {}
-    void read() override {
+    virtual void read() override {
         Aeroport::read();
         setOwnerX1();
         setOwnerX2();
         setOwnerX3();
     }
-    void show() override {
+    virtual void show() override {
         Aeroport::show();
         cout<<"x1: "<<getOwnerX1()<<endl<<"x2: "<<getOwnerX2()<<endl<<"x3: "<<getOwnerX3()<<endl<<"=============================="<<endl<<endl;
     }
@@ -88,6 +87,8 @@ public:
     const string& getOwnerX1() const { return x1; }
     int getOwnerX2() const { return x2; }
     int getOwnerX3() const { return x3; }
+    virtual int getRaceNumber() const override { return Aeroport::getRaceNumber(); }
+    virtual string getCountryName() const override { return Aeroport::getCountryName(); }
 };
 
 class TimeZone : virtual public Aeroport {
@@ -96,16 +97,16 @@ private:
 protected:
     int y3;
 public:
-    TimeZone(): Aeroport(), y1(""), y2(0) {}
+    TimeZone(): Aeroport(), y1(""), y2(0), y3(0) {}
     TimeZone(string company, string data, string country, int courses, string y1P, int y2P, int y3P): Aeroport(move(company), move(data), move(country), courses), y1(move(y1P)), y2(y2P), y3(y3P) {}
     ~TimeZone() {}
-    void read() override {
+    virtual void read() override {
         Aeroport::read();
         setTimeZoneY1();
         setTimeZoneY2();
         setTimeZoneY3();
     }
-    void show() override {
+    virtual void show() override {
         Aeroport::show();
         cout<<"y1: "<<getTimeZoneY1()<<endl<<"y2: "<<getTimeZoneY2()<<endl<<"y3: "<<getTimeZoneY3()<<endl<<"=============================="<<endl<<endl;
     }
@@ -124,6 +125,8 @@ public:
     const string& getTimeZoneY1() const { return y1; }
     int getTimeZoneY2() const { return y2; }
     int getTimeZoneY3() const { return y3; }
+    virtual int getRaceNumber() const override { return Aeroport::getRaceNumber(); }
+    virtual string getCountryName() const override { return Aeroport::getCountryName(); }
 };
 
 class General : virtual public Owner, virtual public TimeZone {
@@ -131,7 +134,7 @@ private:
     int z1;
 public:
     General(): Owner(), TimeZone(), z1(0) {}
-    General(string a, string b, string c, int d, string e, int f, string g, string h, int i): Owner(move(a), move(b), move(c), d, move(e), f), TimeZone(move(a), move(b), move(c), d, move(g), h), z1(i) {} 
+    General(string a, string b, string c, int d, string e, int f1, int f2, string g, int h1, int h2, int i): Owner(move(a), move(b), move(c), d, move(e), f1, f2), TimeZone(move(a), move(b), move(c), d, move(g), h1, h2), z1(i) {} 
     void show() override {
         Owner::show();
         TimeZone::show();
@@ -148,6 +151,8 @@ public:
         return getGeneralZ1();
     }
     int getGeneralZ1() const { return z1; }
+    int getRaceNumber() const override { return Aeroport::getRaceNumber(); }
+    virtual string getCountryName() const override { return Aeroport::getCountryName(); }
 };
 
 void clearScreen() {
@@ -159,247 +164,96 @@ void clearScreen() {
 }
 void pause(string m) { cout<<endl<<m; cin.ignore(); cin.get(); }
 
-int readAeroporturi(string& msg, vector<Aeroport>& arps) {
-    for(int i=0; i<arps.size(); i++) {
-        cout<<i+1<<". Citire aeroport."<<endl;
-        arps[i].read();
+int readObjects(string& msg, vector<AbstractBase*>& objects) {
+    for(int i=0; i<objects.size(); i++) {
+        cout<<i+1<<". Citire obiect."<<endl;
+        objects[i]->read();
     }
-    msg = "Aeroporturi modificate cu succes. ";
+    msg = "Obiecte modificate cu succes. ";
     return 200;
 }
 
-int modifyByIndex(string& msg, vector<Aeroport>& arps) {
-    int i; cout<<"Scrie pozitia aeroportului pe care vrei sa-l modifici: "; cin>>i;
-    if(cin.fail()) { msg = "Pozitia trebuie sa fie o cifra. "; cin.clear(); cin.ignore(1000, '\n'); return 22; }
-    if(i<1 || i>arps.size()) {
-        msg = "Nu exista asa aeroport. ";
-        return 404;
-    }
-    arps[i-1].read();
-    msg = "Aeroport modificat cu succes. ";
-    return 200;
-}
-
-int showAeroporturi(string& msg, vector<Aeroport>& arps) {
-    for(int i=0; i<arps.size(); i++) arps[i].show();
+int showObjects(string& msg, vector<AbstractBase*>& objects) {
+    for(int i=0; i<objects.size(); i++) objects[i]->show();
     pause("Press enter to continue.");
     return 0;
 }
 
-int sortAeroporturi(string& msg, vector<Aeroport>& arps) {
-    sort(arps.begin(), arps.end(), [](const Aeroport& a1, const Aeroport& a2) { return a1.getRaceNumber() < a2.getRaceNumber(); });
+int sortObjects(string& msg, vector<AbstractBase*>& objects) {
+    sort(objects.begin(), objects.end(), [](const AbstractBase* a1, const AbstractBase* a2) { return a1->getRaceNumber() < a2->getRaceNumber(); });
     msg = "S-a sortat cu succes. ";
     return 200;
 }
 
-int findByCountry(string& msg, vector<Aeroport>& arps) {
+int findObjects(string& msg, vector<AbstractBase*>& objects) {
     string search; cout<<"Scrie ce tara cauti (q for exit): "; cin>>search;
     if(search == "q") return 0;
     int showed = 0;
-    for(int i=0; i<arps.size(); i++)
-        if(arps[i].getCountryName() == search) { arps[i].show(); showed = 1; }
+    for(int i=0; i<objects.size(); i++)
+        if(objects[i]->getCountryName() == search) { objects[i]->show(); showed = 1; }
     if(!showed) { msg = "Nu s-a gasit niciun aeroport cu tara " + search + ". "; return 404; }
     pause("Press enter to continue.");
     return 0;
 }
 
-int addByIndex(string& msg, vector<Aeroport>& arps) {
-    int k; cout<<"Scrie pe ce pozitie vrei sa pui noul element: "; cin>>k;
+int modifyObjects(string& msg, vector<AbstractBase*>& objects) {
+    int i; cout<<"Scrie pozitia aeroportului pe care vrei sa-l modifici: "; cin>>i;
     if(cin.fail()) { msg = "Pozitia trebuie sa fie o cifra. "; cin.clear(); cin.ignore(1000, '\n'); return 22; }
-    if(k<1 || k>arps.size()+1) { msg = "Array-ul nu are asa pozitie disponibila. "; return 34; }
-    Aeroport arp;
-    arp.read();
-    arps.insert(arps.begin() + k-1, move(arp));
-    msg = "Aeroport adaugat cu succes. ";
+    if(i<1 || i>objects.size()) {
+        msg = "Nu exista asa aeroport. ";
+        return 404;
+    }
+    objects[i-1]->read();
+    msg = "Aeroport modificat cu succes. ";
     return 200;
 }
 
-int deleteByCompany(string& msg, vector<Aeroport>& arps) {
+int deleteObjects(string& msg, vector<AbstractBase*>& objects) {
     string k; cout<<"Scrie numele companiei care sa fie sterse (q for exit): "; cin>>k;
     if(k == "q") return 0;
     int deleted = 0;
-    for(int i=0; i<arps.size(); i++) if(arps[i].getCompanyName() == k) { arps.erase(arps.begin() + i); deleted = 1; }
+    for(int i=0; i<objects.size(); i++) if(objects[i]->getCountryName() == k) { objects.erase(objects.begin() + i); deleted = 1; }
     if(deleted) { msg = "Aeroportul " + k + " a fost sters cu succes. "; return 200; } 
     else { msg = "Aeroportul " + k + " nu a fost gasit ca sa fie sters. "; return 404; }
 }
 
-int readOwners(string& msg, vector<Owner>& owners) {
-    for(int i=0; i<owners.size(); i++) {
-        cout<<i+1<<". Citire Owner."<<endl;
-        owners[i].read();
-    }
-    msg = "Owneri modificati cu succes. ";
-    return 200;
-}
-
-int showOwners(string& msg, vector<Owner>& owners) {
-    for(int i=0; i<owners.size(); i++) owners[i].show();
-    pause("Press enter to continue.");
-    return 0;
-}
-
-int sortOwners(string& msg, vector<Owner>& owners) {
-    sort(owners.begin(), owners.end(), [](const Owner& a1, const Owner& a2) { return a1.getOwnerX2() < a2.getOwnerX2(); });
-    msg = "S-a sortat cu succes. ";
-    return 200;
-}
-
-int findByOwnerX1(string& msg, vector<Owner>& owners) {
-    string search; cout<<"Scrie ce nume cauti (q for exit): "; cin>>search;
-    if(search == "q") return 0;
-    int showed = 0;
-    for(int i=0; i<owners.size(); i++)
-        if(owners[i].getOwnerX1() == search) { owners[i].show(); showed = 1; }
-    if(!showed) { msg = "Nu s-a gasit niciun owner cu numele " + search + ". "; return 404; }
-    pause("Press enter to continue.");
-    return 0;
-}
-
-int modifyOwnerByIndex(string& msg, vector<Owner>& owners) {
-    int i; cout<<"Scrie pozitia aeroportului pe care vrei sa-l modifici: "; cin>>i;
-    if(cin.fail()) { msg = "Pozitia trebuie sa fie o cifra. "; cin.clear(); cin.ignore(1000, '\n'); return 22; }
-    if(i<1 || i>owners.size()) {
-        msg = "Nu exista asa aeroport. ";
-        return 404;
-    }
-    owners[i-1].read();
-    msg = "Aeroport modificat cu succes. ";
-    return 200;
-}
-
-int deleteOwnerByX1(string& msg, vector<Owner>& owners) {
-    string k; cout<<"Scrie numele care sa fie sterse (q for exit): "; cin>>k;
-    if(k == "q") return 0;
-    int deleted = 0;
-    for(int i=0; i<owners.size(); i++) if(owners[i].getOwnerX1() == k) { owners.erase(owners.begin() + i); deleted = 1; }
-    if(deleted) { msg = "Aeroportul ownerului " + k + " a fost sters cu succes. "; return 200; } 
-    else { msg = "Aeroportul ownerului " + k + " nu a fost gasit ca sa fie sters. "; return 404; }
-}
-
-int readTimeZones(string& msg, vector<TimeZone>& timezones) {
-    for(int i=0; i<timezones.size(); i++) {
-        cout<<i+1<<". Citire timezone."<<endl;
-        timezones[i].read();
-    }
-    msg = "Timezone modificati cu succes. ";
-    return 200;
-}
-
-int showTimeZones(string& msg, vector<TimeZone>& timezones) {
-    for(int i=0; i<timezones.size(); i++) timezones[i].show();
-    pause("Press enter to continue.");
-    return 0;
-}
-
-int sortTimeZone(string& msg, vector<TimeZone>& timezones) {
-    sort(timezones.begin(), timezones.end(), [](const TimeZone& a1, const TimeZone& a2) { return a1.getTimeZoneY2() < a2.getTimeZoneY2(); });
-    msg = "S-a sortat cu succes. ";
-    return 200;
-}
-
-int findTimeZoneByY1(string& msg, vector<TimeZone>& timezones) {
-    string search; cout<<"Scrie ce oras cauti (q for exit): "; cin>>search;
-    if(search == "q") return 0;
-    int showed = 0;
-    for(int i=0; i<timezones.size(); i++)
-        if(timezones[i].getTimeZoneY1() == search) { timezones[i].show(); showed = 1; }
-    if(!showed) { msg = "Nu s-a gasit niciun oras cu numele " + search + ". "; return 404; }
-    pause("Press enter to continue.");
-    return 0;
-}
-
-int modifyTimeZoneByIndex(string& msg, vector<TimeZone>& timezones) {
-    int i; cout<<"Scrie pozitia aeroportului pe care vrei sa-l modifici: "; cin>>i;
-    if(cin.fail()) { msg = "Pozitia trebuie sa fie o cifra. "; cin.clear(); cin.ignore(1000, '\n'); return 22; }
-    if(i<1 || i>timezones.size()) {
-        msg = "Nu exista asa aeroport. ";
-        return 404;
-    }
-    timezones[i-1].read();
-    msg = "Aeroport modificat cu succes. ";
-    return 200;
-}
-
-int deleteTimeZoneByY1(string& msg, vector<TimeZone>& timezones) {
-    string k; cout<<"Scrie numele orasului care sa fie sterse (q for exit): "; cin>>k;
-    if(k == "q") return 0;
-    int deleted = 0;
-    for(int i=0; i<timezones.size(); i++) if(timezones[i].getTimeZoneY1() == k) { timezones.erase(timezones.begin() + i); deleted = 1; }
-    if(deleted) { msg = "Aeroportul orasului " + k + " a fost sters cu succes. "; return 200; } 
-    else { msg = "Aeroportul orasului " + k + " nu a fost gasit ca sa fie sters. "; return 404; }
-}
-
-int choseOption(string menuTipe, string menu, int &status, string &msg, int max) {
+int showMenu(int &status, string &msg, vector<AbstractBase*>& objects) {
+    static int (*menu[7])(string &, vector<AbstractBase*>&) = { readObjects, showObjects, sortObjects, findObjects, modifyObjects, deleteObjects };
     clearScreen();
-    cout<<menuTipe<<endl;
-    cout<<menu<<msg;
+    cout<<"------------------------------------------------\n1. Citeste obiectele.\n2. Afiseaza obiectele.\n3. Sorteaza dupa nr. de curse.\n4. Cauta dupa tara.\n5. Citire aeroport nou pe pozitie specifica.\n6. Stergere dupa tara.\n7. exit\n------------------------------------------------\n"<<msg;
     if(status) cout<<"(status: "<<status<<") ";
     cout<<"Alege optiunea: ";
     int option;
     while(!(cin>>option)) { cout<<"Trebuie sa fie cifra (int): "; cin.clear(); cin.ignore(1000, '\n'); }
-    while(option <= 0 || option > max) { cout<<"Optiunea poate fi intre 1 si "<<max<<": "; cin>>option; }
-    return option;
-}
-
-void showMenu1(int &status, string &msg, vector<Aeroport> &aeroporturi, int &menuSelected) {
-    static int (*menu[7])(string &, vector<Aeroport> &) = { readAeroporturi, showAeroporturi, sortAeroporturi, findByCountry, addByIndex, deleteByCompany, modifyByIndex };
-    int option = choseOption("Aeroport", "------------------------------------------------\n1. Modifica-le pe toate.\n2. Afisare aeroporturi.\n3. Sorteaza dupa nr. de curse.\n4. Cauta aeropoarte dupa tara.\n5. Citire aeroport nou pe pozitie specifica.\n6. Stergere aeroport dupa numele companiei.\n7. Modifica dupa pozitie.\n8. Editeaza meniul de owner\n9. Editeaza meniul de timezone\n10. exit\n------------------------------------------------\n", status, msg, 10);
-    if(option == 8) { menuSelected = 1; return; }
-    if(option == 9) { menuSelected = 2; return; }
-    if(option == 10) { menuSelected = 10; return; } // exit
+    while(option <= 0 || option > 7) { cout<<"Optiunea poate fi intre 1 si 10: "; cin>>option; }
+    if(option == 7) return 0;
     if(status) { status = 0; msg = ""; }
-    status = menu[option-1](msg, aeroporturi);
-}
-
-void showMenu2(int &status, string &msg, vector<Owner> &owners, int &menuSelected) {
-    static int (*menu[6])(string &, vector<Owner> &) = { readOwners, showOwners, sortOwners, findByOwnerX1, modifyOwnerByIndex, deleteOwnerByX1 };
-    int option = choseOption("Owner", "------------------------------------------------\n1. Modifica-le pe toate.\n2. Afisare owners.\n3. Sorteaza dupa x2.\n4. Cauta aeropoarte dupa x1.\n5. Modifica dupa pozitie.\n6. Stergere aeroport dupa x1.\n7. Inapoi la meniul principal\n------------------------------------------------\n", status, msg, 7);
-    if(option == 7) { menuSelected = 0; return; }
-    if(status) { status = 0; msg = ""; }
-    status = menu[option-1](msg, owners);
-}
-
-void showMenu3(int &status, string &msg, vector<TimeZone> &timezones, int &menuSelected) {
-    static int (*menu[7])(string &, vector<TimeZone> &) = { readTimeZones, showTimeZones, sortTimeZone, findTimeZoneByY1, modifyTimeZoneByIndex, deleteTimeZoneByY1 };
-    int option = choseOption("TimeZone", "------------------------------------------------\n1. Modifica-le pe toate.\n2. Afisare timezone.\n3. Sorteaza dupa y2.\n4. Cauta aeropoarte dupa y1.\n5. Modifica dupa pozitie.\n6. Stergere aeroport dupa y1.\n7. Inapoi la meniul principal\n------------------------------------------------\n", status, msg, 7);
-    if(option == 7) { menuSelected = 0; return; }
-    if(status) { status = 0; msg = ""; }
-    status = menu[option-1](msg, timezones);
+    status = menu[option-1](msg, objects);
+    return 1;
 }
 
 int main() {
     srand(time(0));
     string msg = ""; int status = 0;
-    vector<Aeroport> aeroporturi;
-    vector<Owner> owners;
-    vector<TimeZone> timeZones;
-
-    //autogenerare
-    int autoGenerate;
-    cout<<"Cate aeropoarte sa se genereze automat?: ";
-    while(!(cin>>autoGenerate)) { cout<<"Trebuie sa fie cifra (int): "; cin.clear(); cin.ignore(1000, '\n'); }
-    for(int i=1; i<=autoGenerate; i++) {
-        int year = rand() % 75;
-        Aeroport arp("company"+to_string(i), to_string(rand() % 30 + 1) + "/" + to_string(rand() % 11 + 1) + "/" + to_string(year + 1950), "country"+to_string(i), (rand() % 200 + 165) * (75 - year));
-        Owner own(arp.getCompanyName(), arp.getDate(), arp.getCountryName(), arp.getRaceNumber(), "x1"+to_string(i), i, rand() % 100);
-        TimeZone tmz(arp.getCompanyName(), arp.getDate(), arp.getCountryName(), arp.getRaceNumber(), "y1"+to_string(i), i, rand() % 100);
-        aeroporturi.push_back(move(arp));
-        owners.push_back(move(own));
-        timeZones.push_back(move(tmz));
-    }
-
-    //meniu
-    status = 200; msg = "Am adaugat " + to_string(autoGenerate) + " aeroporturi. ";
-    int menuSelected = 0;
-    while(1) {
-        switch(menuSelected) {
-            case 0: { showMenu1(status, msg, aeroporturi, menuSelected); break; }
-            case 1: { showMenu2(status, msg, owners, menuSelected); break; }
-            case 2: { showMenu3(status, msg, timeZones, menuSelected); break; }
-            default: break;
+    
+    int n;
+    cout<<"Cate elemenete vrei sa adaugi: ";
+    while(!(cin>>n)) { cout<<"Trebuie sa fie cifra (int): "; cin.clear(); cin.ignore(1000, '\n'); }
+    vector<AbstractBase*> objects;
+    for(int i=0; i<n; i++) {
+        int tip;
+        cout<<"Ce tip sa fie elementul "<<i+1<<" (1: Aeroport, 2: Owner, 3: TimeZone, 4: General): ";
+        while(!(cin>>tip)) { cout<<"Trebuie sa fie cifra (int): "; cin.clear(); cin.ignore(1000, '\n'); }
+        switch(tip) {
+            case 1: { objects.push_back(new Aeroport()); break; }
+            case 2: { objects.push_back(new Owner()); break; }
+            case 3: { objects.push_back(new TimeZone()); break; }
+            case 4: { objects.push_back(new General()); break; }
+            default: { cout<<"Tip invalid: "; i--; break; }
         }
-        if(menuSelected == 10) break;
     }
+
+    while(showMenu(status, msg, objects));
 
     return 0;
 }

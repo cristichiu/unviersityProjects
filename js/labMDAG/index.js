@@ -1,5 +1,5 @@
-const puncte = [1,2,3,4,5,6,7,8]
-const muchii = [[1,2], [2,3], [5,6], [3,5], [1,7], [4,8], [4,5]]
+const puncte = [1,2,3,4,5,6,7,8, 9]
+const muchii = [[1,4], [1,7], [1,2], [1,6], [5,8], [5,6], [5,4], [3,4], [3,2], [2,9]]
 const matriceDeIncidenta = []
 const formaAlgebricaGrafMuchii = []
 for(let i=0; i<puncte.length; i++) {
@@ -17,13 +17,16 @@ for(let i=0; i<muchii.length; i++) {
 
 for(let i=0; i<matriceDeIncidenta.length; i++) {
     let st = null
-    for(let j=0; j<matriceDeIncidenta[i].length; j++) {
-        if(matriceDeIncidenta[i][j]) {
-            if(st == null) st = j+1; else {
-                formaAlgebricaGrafMuchii.push([st, j+1])
-                st = j+1
+    for(let z=0; z<matriceDeIncidenta[i].length; z++) { 
+        if(matriceDeIncidenta[i][z] && st == null) {
+            st = z+1
+            for(let j=z+1; j<matriceDeIncidenta[i].length; j++) {
+                if(matriceDeIncidenta[i][j]) {
+                    formaAlgebricaGrafMuchii.push([st, j+1])
+                }
             }
         }
+        st = null
     }
 }
 
@@ -74,8 +77,8 @@ function DFS(vs, matDeInc) {
         }
     }
 
-    console.log("Flaguri:", flaguri);
-    console.log("Parcurgere DFS:", parcurgere);
+    console.log("Flaguri: " + flaguri);
+    console.log("Parcurgere DFS: " + parcurgere);
 }
 DFS(2, matriceDeIncidenta)
 
