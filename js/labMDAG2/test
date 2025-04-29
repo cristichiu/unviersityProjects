@@ -1,0 +1,6 @@
+Lab3
+1: Colorarea grafurilor.
+Sarcina de baza este de colorat corect un graf utilizand hi(g) culori cel mai optimal, algoritmul PD, programare dinamica sau metoda succesiva (triere simpla) optimizata BFS parcurgere in latime (arbore de colorare, cum se determina)
+2, 3: Construiti arborele partial de acoperire de cost minim.
+2: Metoda lui Prim
+3: Metoda lui Kruskal

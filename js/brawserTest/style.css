@@ -1,2 +1,4 @@
 *, *::before, *::after { box-sizing: border-box; padding: 0; margin: 0 }
-body { min-height: 100vh; display: flex; justify-content: center; align-items: center }
+body { min-height: 100vh; display: flex; justify-content: center; align-items: center; flex-direction: column; }
+
+#container { display: flex; gap: 3rem }
