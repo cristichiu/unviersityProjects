@@ -1,3 +1,4 @@
+// Algoritmul lui Malgrange
 const matDeAdiacenta1 = [
     [0,1,0,0,0],
     [1,0,1,1,1],
@@ -22,21 +23,71 @@ const matDeAdiacenta3 = [
     [0,0,0,0,0]
 ]
 
+const matDeAdiacenta4 = [
+    [0,1,1,0,0,0],
+    [1,0,1,0,0,0],
+    [1,1,0,0,0,0],
+    [0,0,0,0,1,1],
+    [0,0,0,1,0,0],
+    [0,0,0,1,0,0]
+]
+
+const matDeAdiacenta5 = [
+    [0,1,0,0,1,1,0],
+    [1,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0],
+    [1,0,0,0,0,1,0],
+    [1,0,0,0,1,0,0],
+    [0,0,0,0,0,0,0]
+]
+
+const matDeAdiacenta6 = [
+    [0,0,1,0],
+    [0,0,0,1],
+    [1,0,0,0],
+    [0,1,0,0],
+]
+
+const matDeAdiacenta7 = [
+    [0,0,1,0,1],
+    [0,0,0,1,0],
+    [1,0,0,0,0],
+    [0,1,0,0,0],
+    [1,0,0,0,0]
+]
+
+const matDeAdiacenta8 = [
+    [0,0,1,1,0,0],
+    [0,0,1,0,0,0],
+    [1,1,0,1,0,1],
+    [1,0,1,0,0,0],
+    [0,0,0,0,0,0],
+    [0,0,1,0,0,0],
+]
+
+const matDeAdiacenta9 = [
+    [0,1,1,1],
+    [1,0,1,1],
+    [1,1,0,1],
+    [1,1,1,0],
+]
+
 class SetStabilInterior {
     constructor(matriceDeAdiacenta) {
         this.matriceDeAdiacenta = matriceDeAdiacenta
-        this.inversaMatriceDeAdiacenta = []
+        this.complementulMatricii = []
         this.f = []
         this.nextF = [...this.f]
         this.iteratii = 0
         this.result = []
     }
     pasu1() {
-        this.inversaMatriceDeAdiacenta = this.matriceDeAdiacenta.map(l => { return l.map(s => s?0:1) })
+        this.complementulMatricii = this.matriceDeAdiacenta.map(l => { return l.map(s => s?0:1) })
         this.pasu2()
     }
     pasu2() {
-        this.inversaMatriceDeAdiacenta.forEach((r, i) => {
+        this.complementulMatricii.forEach((r, i) => {
             let a = []
             r.forEach((u, j) => { if (u) a.push(j + 1) })
             this.f.push({ l: new Set([i + 1]), c: new Set(a) })
@@ -107,18 +158,10 @@ class SetStabilInterior {
         this.result.forEach(r => {
             console.log(r.join(", "))
         })
-        console.log("Rezultat optinut din:", this.iteratii)
+        console.log("Rezultat optinut din (de cate ori am executat pasu3):", this.iteratii)
     }
 }
 
-let mat1 = new SetStabilInterior(matDeAdiacenta1)
-let mat2 = new SetStabilInterior(matDeAdiacenta2)
-let mat3 = new SetStabilInterior(matDeAdiacenta3)
-
-mat1.calculate()
-mat2.calculate()
-mat3.calculate()
-
-mat1.showResult()
-mat2.showResult()
-mat3.showResult()
+let mat = new SetStabilInterior(matDeAdiacenta8)
+mat.calculate()
+mat.showResult()

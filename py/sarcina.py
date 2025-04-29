@@ -1,14 +1,6 @@
-def division():
-    a = input("primul numar: ")
-    b = input("al 2-lea numar: ")
-    try:
-        c = int(a)/int(b)
-    except ValueError:
-        print("Una din cifre nu este numar.")
-    except ZeroDivisionError:
-        print("S-a incercat impartirea la 0.")
-    except TypeError:
-        print("Operatia nu este posibila din alte motive.")
-    else:
-        print("Operatia completata cu succes.")
-division()
+import re
+test = ['abc10','bca09','cab20','abc30','cab18','abc00','cab11','aad19']
+rezult = []
+for t in test:
+    rezult.append(re.search("^[abc]{3}(1[0-9]|20)$", t) != None)
+print(rezult)
